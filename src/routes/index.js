@@ -1,35 +1,38 @@
-export default {
-  path: '/',
+import React from 'react'
+import { history } from 'STORE'
+import { Router, Route, IndexRoute } from 'react-router'
 
-  component: require('COMPONENT/App').default,
-  
-  indexRoute: {
-    component: require('COMPONENT/Welcome').default
-  },
-  
-  childRoutes: [
-    // 路由按模块组织分离，避免单文件代码量过大
-    require('./msg').default,
-    require('./todo').default,
-    
-    // 强制“刷新”页面的 hack
-    { path: 'redirect', component: require('COMPONENT/Redirect').default },
-    
-    // 无路由匹配的情况一定要放到最后，否则会拦截所有路由
-    { path: '*', component: require('COMPONENT/404').default }
-  ]
-}
+import App from 'COMPONENT/App'
+import Welcome from 'COMPONENT/Welcome'
+import TruckList from 'COMPONENT/Room/TruckList'
+
+
+import Err from 'COMPONENT/404'
+
+
+const RouteConfig = (
+  <Router history={history}>
+    <Route path="/" component={App}>
+      <IndexRoute component={Welcome}/>
+      <Route path="room/:id" component={TruckList}/>
+      <Route path="*" component={Err}/>
+    </Route>
+  </Router>
+)
+
+export default RouteConfig
+
 
 /*
   当前路由树如下
   ├ /
   |
-  ├ /msg
-  ├ /msg/add
-  ├ /msg/detail/:msgId
-  ├ /msg/modify/:msgId
-  |
-  ├ /todo
-  |
-  ├ /redirect
+  ├ /room/:id
+  ├ /room/:id/:msgId
+  ├ 
+  ├ 
+  ├ 
+  ├ 
+  ├ 
+  ├ 
 */

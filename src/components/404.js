@@ -7,7 +7,8 @@ export default class NotFound extends Component {
 
   componentWillMount() {
     alert('404 NOT FOUND')
-    this.context.router.replace('/')
+    // this.context.router.replace('/')
+    window.history.back()
   }
 
   render () {

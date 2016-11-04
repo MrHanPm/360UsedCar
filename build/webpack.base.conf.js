@@ -22,7 +22,6 @@ module.exports = {
     // ================================
     vendor: [
       'history',
-      'lodash',
       'react',
       'react-dom',
       'react-redux',

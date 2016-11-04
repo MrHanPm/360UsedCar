@@ -2,17 +2,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { Router } from 'react-router'
-import store, { history } from 'STORE'
-import routes from 'ROUTE'
-
+import store from 'STORE'
+import route from 'ROUTE'
+import 'ASSET/less/foot.less'
+import 'ASSET/less/secondHandCar.less'
+import 'ASSET/less/css.less'
 /**
  * 下面这货用于检测不必要的重新渲染，详情请看其项目地址：
  * https://github.com/garbles/why-did-you-update
- *
- * 有关性能提升方面的问题
- * 诸如 PureComponent / shouldComponentUpdate / Immutable.js 等
- * 请自行查阅相关资料
  */
 if (__DEV__ && __WHY_DID_YOU_UPDATE__) {
   const { whyDidYouUpdate } = require('why-did-you-update')
@@ -28,11 +25,11 @@ if (__PROD__) {
 // ================================
 // 将根组件挂载到 DOM，启动！
 // ================================
-const MOUNT_NODE = document.getElementById('app')
+const MOUNT_NODE = document.getElementById('AppBody')
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history} children={routes} />
+    {route}
   </Provider>,
   MOUNT_NODE
 )
@@ -40,7 +37,7 @@ ReactDOM.render(
 // === Webpack 处理 assets，取消注释即可进行测试 === //
 /* 处理 less / sass */
 // import 'ASSET/less/normalize.less'
-// import 'ASSET/scss/normalize.scss'
+
 
 /* 处理 img，小于 10KB 的转为 base64，否则使用 URL */
 // import base64 from 'ASSET/img/smaller.png'
@@ -51,10 +48,8 @@ ReactDOM.render(
 //   img.src = content
 //   document.body.appendChild(img)
 // }
-
 // appendImgToBody(base64)
 // appendImgToBody(url)
-
 
 /**
  * 【拓展】

@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
 import store from 'STORE'
-import userReducer from 'REDUCER/user'
+import homeReducer from 'REDUCER/home'
 
 // ================================
 // 同步的 Reducers（即应用初始化所必需的）
 // ================================
 const syncReducers = {
   router: routerReducer,
-  userData: userReducer
+  homeToday: homeReducer
 }
 
 // ================================

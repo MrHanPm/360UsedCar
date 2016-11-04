@@ -1,0 +1,101 @@
+/*   Mr.Han   */
+
+
+
+html,body,#app,.container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.container{
+    .auction-pic-list{
+        height: 101%;
+        overflow-y: scroll; 
+        padding-bottom: 50px;
+        box-sizing: border-box;
+        -webkit-overflow-scrolling:touch;
+        .underway,.begin,.finish{
+            position: absolute;
+        }
+    }
+    
+}
+.home-foot{
+    padding: 0 72px;
+    top: -50px;
+    left: 0;
+    z-index: 66;
+}
+.car-list li img{
+  width: 80px;
+  height: 80px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-----------错误信息顶部弹窗--------*/
+.notification {
+  position: absolute;
+  width: 100%;
+  min-height: 3.4rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  opacity:0;
+  background-color: rgba(234,67,53, 0.85);
+  color: white;
+  font-size: .65rem;
+  -webkit-transform: translate3d(0, -100%, 0);
+          transform: translate3d(0, -100%, 0);
+  -webkit-transition:all .4s;
+  transition:all .4s;
+}
+.notification.notification-in {
+          opacity:1;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.notification .notification-inner {
+  padding:.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+}
+.notification .notification-content {
+  width: 100%;
+  margin: 0rem .4rem;
+}
+.notification .notification-title {
+  font-weight: 400;
+  font-size:16px;
+  text-align:center;
+  letter-spacing:2px;
+}
+.notification .notification-handle-bar {
+  position: absolute;
+  bottom: .2rem;
+  left: 50%;
+  -webkit-transform: translate3d(-50%, 0, 0);
+          transform: translate3d(-50%, 0, 0);
+  width: 2rem;
+  height: .3rem;
+  border-radius: .15rem;
+  background: white;
+  opacity: .5;
+}
