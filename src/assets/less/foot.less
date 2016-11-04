@@ -9,19 +9,19 @@ html,body,form,p,h1,h2,h3,h4,dl,ul,ol,li,dt,dd,select,figure,figcaption{margin:0
 body,select,input,option,button,textarea{color:#333;font:12px/1.5 "Microsoft YaHei",Arial;-webkit-text-size-adjust:none;}
 ul,ol,li{list-style-type:none;}
 em,i,var{font-style:normal;}
-a{text-decoration:none;color:#333; }
+a{text-decoration:none;color:#333;-webkit-tap-highlight-color:transparent;-webkit-tap-highlight-color:rgba(255,0,0,0);}
 a img{border:0 none;}
 img{width:100%;vertical-align:top;}
 body{background:#f5f5f5;}
 
 @font-face {
   font-family: 'second';
-  src:url('//at.alicdn.com/t/font_ivfd01rgkrfi529.woff') format('woff'),
-  url('//at.alicdn.com/t/font_ivfd01rgkrfi529.ttf') format('truetype')
-}  
+  src:url('//at.alicdn.com/t/font_otyfvqmjwqshh0k9.woff') format('woff'),
+  url('//at.alicdn.com/t/font_otyfvqmjwqshh0k9.ttf') format('truetype')
+}
 
 /*主页吸底*/
-.home-foot,.detail-foot{position:relative;height:50px;line-height:50px;background: #FAFBFC;box-shadow: 0px -1px 2px 0px rgba(0,0,0,0.05);padding:0 52px;display: -webkit-box;display: -ms-flexbox;display:flex;}
+.home-foot,.detail-foot,.footer{position:relative;height:50px;line-height:50px;background: #FAFBFC;box-shadow: 0px -1px 2px 0px rgba(0,0,0,0.05);padding:0 52px;display: -webkit-box;display: -ms-flexbox;display:flex;}
 .home-foot span{position:absolute;top:7px;width:36px;height:36px;border-radius:50%;border:0.5px solid #e5e5e5;}
 .home-foot .return{left:15px;}
 .home-foot .return:before{position:absolute;top:-6px;left:10px;font-family: 'second';content:"\5de6";font-size:12px;color:#999;}
@@ -55,9 +55,9 @@ body{background:#f5f5f5;}
 .detail-foot .sign-up{width:243px;height:36px;margin:7px auto 0;background:#f85200;border-radius:18px;text-align:center;}
 .detail-foot .sign-up h4{line-height:16px;font-size:16px;color:#fff;font-weight:bold;margin:4px 0 2px 0;}
 .detail-foot .sign-up em{display:block;line-height:10px;font-size:10px;color:#fff;}
-.detail-foot span,.comment span{position:absolute;top:7px;width:36px;height:36px;border-radius:50%;border:0.5px solid #e5e5e5;display: -webkit-box;display: -ms-flexbox;display:flex;}
-.detail-foot .return,.comment .return{left:15px;}
-.detail-foot .return:before{position:absolute;top:-6px;left:10px;font-family: 'second';content:"\5de6";font-size:12px;color:#999;}
+.detail-foot .return,.menu,.comment .return,.menu,.footer .return{position:absolute;top:7px;width:36px;height:36px;border-radius:50%;border:0.5px solid #e5e5e5;display: -webkit-box;display: -ms-flexbox;display:flex;}
+.detail-foot .return,.comment .return,.footer .return{left:15px;}
+.detail-foot .return:before,.footer .return:before{position:absolute;top:-6px;left:10px;font-family: 'second';content:"\5de6";font-size:12px;color:#999;}
 .detail-foot .menu,.comment .menu{right:15px;}
 .detail-foot .menu:before{position:absolute;top:-6px;left:11px;font-family: 'second';content:"\5355";color:#999;font-size:15px;}
 .comment .return:before{position:absolute;top:10px;left:10px;font-family: 'second';content:"\5de6";font-size:12px;color:#999;}
@@ -74,4 +74,30 @@ body{background:#f5f5f5;}
 .auction-list .connection{background:#fff;color:#333;border:0.5px solid #e5e5e5;-webkit-box-flex:1;-moz-box-flex: 1;-ms-flex:1;flex: 1;}
 .auction-list .home-page:before{position:absolute;top:6px;left:9px;font-family: 'second';content:"\9996";font-size:16px;color:#979797;}
 .auction-list .close:before{position:absolute;top:10px;left:12px;font-family: 'second';content:"\5173";font-size:13px;color:#999;}
+
+/*拍卖已报名吸底*/
+.footer{padding:0 0 0 66px;margin-top:4px;}
+.footer .prix{display:inline-block;width:143px;height:36px;line-height:36px;text-align:center;background: #FFEEE6;border-radius:18px;margin-top:7px;overflow:hidden;}
+.footer .prix .plus,.footer .prix .reduce{float:left;margin:0 3px;}
+.footer .prix .plus:before{font-family: 'second';content:"\51cf";font-size:30px;opacity: 0.4;color: #F85200;}
+.footer .prix .reduce{float:right;}
+.footer .prix .reduce:before{font-family: 'second';content:"\52a0";font-size:30px;color:#f85200;opacity:1;}
+.footer .prix var{font-size:16px;color:#f85200;}
+.footer .bidding{position:relative;display:block;width:85px;height:36px;line-height:36px;border-radius:18px;background:#f85200;font-size:16px;color:#fff;text-align:center;margin:7px 0 0 15px;}
+.footer .bidding:before{position:absolute;top:-15px;right:40px;width:6px;height:6px;content:"";border-right:1px solid #F85200;border-top:1px solid #f85200;background: rgba(255,255,255,0.95);-webkit-transform: rotate(136deg);transform: rotate(136deg);}
+
+/*倒计时弹层*/
+.countdown{position:relative;height:46px;margin:0 15px;padding:0 25px;background: rgba(255,255,255,0.95);border: 0.5px solid #F85200;box-shadow: 0px 1px 4px 0px rgba(248,81,0,0.40);border-radius: 3px;display: -webkit-box;display: -ms-flexbox;display:flex;}
+.countdown .present{font-size:12px;color:#999;-webkit-box-flex:1;-moz-box-flex: 1;-ms-flex:1;flex: 1;}
+.countdown em{display:block;font-size:16px;color:#f85200;}
+.countdown .timer{-webkit-box-flex:1;-moz-box-flex: 1;-ms-flex:1;flex: 1;}
+.countdown .timer i{display:block;font-size:12px;color:#999;}
+.countdown .timer span{font-size:16px;color:#f85200;}
+
+
+
+
+
+
+
 

@@ -21,8 +21,10 @@ export default {
     trucks: {},    // 请求的数据
     tools: {
       nowPage: 1
-    }
+    },
+    truckImg: []
   },
+
   /* 留言板模块（按需加载） */
   msg: {
     msgs: [],           // 当前显示的留言列表

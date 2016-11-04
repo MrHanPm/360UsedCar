@@ -4,7 +4,6 @@ import { Link } from 'react-router'
 // import { dataTimeCountdown} from 'UTIL/dateTimeFormatter'
 import Heads from './Head'
 import { injectReducer } from 'REDUCER'
-
 injectReducer('room', require('REDUCER/room/').default)
 
 @connect(
@@ -27,7 +26,7 @@ export default class TruckList extends Component {
       DBS = trucks.trucks
     }
     return (
-      <div>
+      <div className="TrLiBox">
         <Heads DATA={trucks.salesroom}/>
         <div className="set-up">
           <div className="time">

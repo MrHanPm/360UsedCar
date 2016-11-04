@@ -8,40 +8,96 @@ html,body,#app,.container{
     overflow: hidden;
 }
 .container{
-    .auction-pic-list{
+    .auction-pic-list,.picture-list{
         height: 101%;
         overflow-y: scroll; 
         padding-bottom: 50px;
         box-sizing: border-box;
         -webkit-overflow-scrolling:touch;
-        .underway,.begin,.finish{
-            position: absolute;
-        }
     }
     
 }
-.home-foot{
-    padding: 0 72px;
-    top: -50px;
-    left: 0;
-    z-index: 66;
+.TrLiBox{
+  height: 100%;
+  padding-bottom: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling:touch;
 }
+
+.BoxBt55{
+  height: 100%;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  overflow: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling:touch;
+}
+
 .car-list li img{
   width: 80px;
   height: 80px;
 }
 
 
+.underway,.begin,.finish,.share,.location,.enshrine{
+    position: absolute;
+}
 
 
+/*----------Bid record----------*/
+.bid-list li{
+  img{
+    width: 40px;
+    height: 40px;
+  }
+}
+.bid-list li:first-child{
+  img{
+    width: 50px;
+    height: 50px;
+  }
+}
+.bid-list .ahead,.bid-list .eliminated{left: 15px;}
+
+.Ding{
+  position: absolute;
+  top: 10px;
+  margin: 0;
+  left: 0;
+  z-index: 55;
+  width: 100%;
+}
+
+.DinHead{
+  height: 101%;
+  box-sizing: border-box;
+  padding: 55px 0 0;
+  overflow: hidden;
+  overflow-y: scroll;
+  background: none;
+  -webkit-overflow-scrolling:touch;
+  li{
+    background: #fff;
+    padding: 0 15px;
+  }
+}
+/*----------end----------*/
 
 
+.cash{background: #FD9D6E;}
+.home-foot,.detail-foot,.comment{
+    padding: 0 72px;
+    top: -50px;
+    left: 0;
+    z-index: 66;
+}
+.detail-foot, .comment, .auction-list{margin-top: 0;}
 
-
-
-
-
-
+.comment{
+    padding-top: 7px;
+}
 
 /*-----------错误信息顶部弹窗--------*/
 .notification {

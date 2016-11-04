@@ -7,6 +7,7 @@ import route from 'ROUTE'
 import 'ASSET/less/foot.less'
 import 'ASSET/less/secondHandCar.less'
 import 'ASSET/less/css.less'
+import 'ASSET/less/loading.less'
 /**
  * 下面这货用于检测不必要的重新渲染，详情请看其项目地址：
  * https://github.com/garbles/why-did-you-update
@@ -35,8 +36,6 @@ ReactDOM.render(
 )
 
 // === Webpack 处理 assets，取消注释即可进行测试 === //
-/* 处理 less / sass */
-// import 'ASSET/less/normalize.less'
 
 
 /* 处理 img，小于 10KB 的转为 base64，否则使用 URL */
@@ -67,7 +66,7 @@ ReactDOM.render(
  *    }
  *  }
  *  
- *  但上面这种官方的做法实在太麻烦，于是我们有更为直接的方式：
+ *  但上面这种官方的做法实在太麻烦，于是有更为直接的方式：
  *  import store from 'STORE'
  *  store.getState() // 只读，更改 state 只能通过 dispatch
 */

@@ -41,5 +41,5 @@ export default {
 
 export const ACTION_TRUCK = {
   [GET_LIST]: (trucks, { payload }) => payload,
-  [GET_IMG]: (truckImg, { payload }) => payload
+  [GET_IMG]: (truckImg, { payload }) => [...payload]
 }
