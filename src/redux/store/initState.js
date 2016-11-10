@@ -19,29 +19,24 @@ export default {
   /* 拍卖主场数据 */
   room: {
     trucks: {},    // 请求的数据
-    tools: {
-      nowPage: 1
-    },
     truckImg: []
   },
-
+  /* 卡车详情数据 */
+  truckMsg: {
+    mode: {},
+    dataDB: {
+      abc: ''
+    }
+  },
+  /* 出价记录 */
+  bidRecord: [],
+  /* 出价 */
+  pay: {},
   /* 留言板模块（按需加载） */
   msg: {
     msgs: [],           // 当前显示的留言列表
     displayControl: {   // 查询条件
-      pageIdx: 1,         // 默认是第 10 页
-      quantity: 10,       // 默认每页显示 10 条记录
-      authorSpecified: '' // 是否有指定发布者
+      pageIdx: 1     
     }
-  },
-
-  /* 待办事项模块（按需加载） */
-  todos: [
-    // {
-    //   id: 123,
-    //   content: '待办事项1',
-    //   completed: false,
-    //   createdAt: 1473499991348
-    // }
-  ]
+  }
 }

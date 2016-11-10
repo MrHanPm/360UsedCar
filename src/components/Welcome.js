@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/'
-// import { LoadBox, NoDataS } from 'VIEW/more'
+import { LoadBox } from 'VIEW/more'
 import { dataTimeCountdown} from 'UTIL/dateTimeFormatter'
 import { Link } from 'react-router'
 
@@ -12,7 +12,7 @@ import { Link } from 'react-router'
 )
 export default class Welcomes extends Component {
   state = {
-    isDatas: false
+    isDatas: true
   }
   componentWillMount () {
     this.props.checkHome()
@@ -21,17 +21,19 @@ export default class Welcomes extends Component {
     // dataTimeCountdown = () => {}
   }
   render () {
-    let mores
+    let mores = ''
 
     let {
       homeToday
     } = this.props
     
-    // if (this.state.isDatas) {
-    //   mores = <NoDataS />
-    // } else {
-    //   mores = <LoadBox />
-    // }
+    if (this.state.isDatas) {
+        mores = <LoadBox />
+        if (homeToday.length > 0) {
+          this.setState({isDatas: false})
+        }
+    }
+
     return (
       <div style={{height: '100%'}}>
         <div className="container">

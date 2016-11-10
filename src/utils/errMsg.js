@@ -1,16 +1,17 @@
-
-
-window.AlertTimeOut = null
-window.CodmInterval = []
+let AlertTimeOut
 
 const ErrMsg = {}
 
 ErrMsg.to = function(val) {
+        let txt = ''
+        if (val) { txt = val}
         clearTimeout(AlertTimeOut)
         let AlertCont = document.getElementById('AlertCont')
         let AlertTxt = document.getElementById('AlertTxt')
-        AlertTxt.innerHTML = val
-        AlertCont.setAttribute('class', 'notification notification-in')
+        if (AlertTxt) {
+            AlertTxt.innerHTML = txt
+            AlertCont.setAttribute('class', 'notification notification-in')
+        }
         AlertTimeOut = setTimeout(() => ErrMsg.out(), 4000)
 }
 

@@ -9,8 +9,8 @@ export default class Navbar extends Component {
         text = this.props.text
     }
     return (
-      <div className="comment" style={this.props.style}>
-        <span className="return"></span>
+      <div className={`comment ${this.props.className}`} style={this.props.style}>
+        <span className="return" onClick ={() => {window.history.back()}}></span>
         <em className="comment-on">{text}</em>
         <span className="menu"></span>
       </div>

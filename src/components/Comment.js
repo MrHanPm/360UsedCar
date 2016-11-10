@@ -30,11 +30,9 @@ export default class TruckList extends Component {
                     <span>车况很好(20)</span>
                     <span>保养的不错(20)</span>
                     <span>动力强劲(19)</span>
-                </div>
-                <div className="harm">
-                    <span>外观有轻微损伤(20)</span>
-                    <span>磨损严重(12)</span>
-                    <span>有严重撞伤(2)</span>
+                    <span className="bad">外观有轻微损伤(20)</span>
+                    <span className="bad">磨损严重(12)</span>
+                    <span className="bad">有严重撞伤(2)</span>
                 </div>
             </div>
             <ul className="posts-list">

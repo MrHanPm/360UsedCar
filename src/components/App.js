@@ -1,5 +1,5 @@
 import React from 'react'
-// import { ErrMsg } from 'UTIL/errMsg'
+import AlertBox from 'VIEW/errMsg'
 
 let DevTools
 if (__DEV__ && __COMPONENT_DEVTOOLS__) {
@@ -11,6 +11,7 @@ const App = ({ children, location }) => (
   <div style={{height: '100%'}}>
     { children }
     { DevTools && <DevTools /> }
+    <AlertBox />
   </div>
 )
 

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/roomfot'
+import {getPNA} from 'UTIL/posName'
 import { injectReducer } from 'REDUCER'
 injectReducer('room', require('REDUCER/room/').default)
 
 @connect(
   ({ room }) => ({ room }),
-  require('ACTION/room').default
+  require('ACTION/room/').default
 )
 
 export default class TruckList extends Component {
@@ -31,7 +32,7 @@ export default class TruckList extends Component {
             { DATA.map(db =>
             <li>
               <figure><img src={`http://face.360che.com${db.src}`} alt="" /></figure>
-              <figcaption>{ db.pos_name }</figcaption>
+              <figcaption>{ getPNA(db.pos_name) }</figcaption>
               <span>{ db.introduction }</span>
             </li>
             )}

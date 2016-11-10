@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-// import { dataTimeCountdown} from 'UTIL/dateTimeFormatter'
+
 import Heads from './Head'
 import { injectReducer } from 'REDUCER'
 injectReducer('room', require('REDUCER/room/').default)
 
 @connect(
   ({ room }) => ({ room }),
-  require('ACTION/room').default
+  require('ACTION/room/').default
 )
 export default class TruckList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+        trucks: {}
+    }
+  }
   componentWillMount () {
     let { params: { id } } = this.props
     this.props.inGet(id)
@@ -18,9 +24,15 @@ export default class TruckList extends Component {
   componentDidMount() {
     // state = this.props || {}
   }
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.room.trucks) {
+        this.setState({ 
+            trucks: nextProps.room.trucks
+        })
+    }
+  }
   render () {
-    let { room: { trucks } } = this.props
+    let { trucks } = this.state
     let DBS = []
     if (typeof (trucks.trucks) == 'object') {
       DBS = trucks.trucks
@@ -38,20 +50,20 @@ export default class TruckList extends Component {
           <a href="#" className="remind">设置提醒</a>
         </div>
         <ul className="car-list">
-        { DBS.map(db =>
-          <li>
+        { DBS.map((db, index) =>
+          <li key={index}>
+            <Link to={`/truck/${this.props.params.id}/${db.truck_id}`}>
             <figure>
-            <Link to={`/room/truck/${db.truck_id}`}>
               <img src={`http://face.360che.com${db.src}`} alt="" />
-            </Link>
             </figure>
             <figcaption>{db.fullname}</figcaption>
-            <em>国四/福田康明斯430马力/55吨</em>
+            <em>{db.explain}</em>
             <em>出价{db.bid_count}次/{db.bid_persons}人竞拍</em>
             <div className="price">
               <span>评估价:{db.sale_price}万</span>
               <span>当前价:<var>{db.cur_price}</var>万</span>
             </div>
+            </Link>
           </li>
         )}
         </ul>

@@ -8,9 +8,9 @@ const GET_IMG = 'GET_IMG'
 // ================================
 // Action Creator
 // ================================
-const loadData = (trucks) => ({
+const loadData = (obj) => ({
   type: GET_LIST,
-  payload: trucks
+  payload: obj
 })
 
 const inGet = Id => dispatch =>
@@ -41,5 +41,5 @@ export default {
 
 export const ACTION_TRUCK = {
   [GET_LIST]: (trucks, { payload }) => payload,
-  [GET_IMG]: (truckImg, { payload }) => [...payload]
+  [GET_IMG]: (truckImg, { payload }) => payload
 }

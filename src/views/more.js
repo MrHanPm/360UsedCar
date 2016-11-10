@@ -37,4 +37,5 @@ class NoDataS extends Component {
     )
   }
 }
-export default { LoadLin, NoMor, LoadBox, NoDataS }
+
+export { LoadLin, NoMor, LoadBox, NoDataS }

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import store from 'STORE'
 import route from 'ROUTE'
+
 import 'ASSET/less/foot.less'
 import 'ASSET/less/secondHandCar.less'
 import 'ASSET/less/css.less'

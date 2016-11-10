@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import msgsReducer from './msgs'
-import truckImages from './imgs'
+import trucks from './msgs'
+import truckImg from './imgs'
 
 export default combineReducers({
-  trucks: msgsReducer,
-  truckImg: truckImages
+  trucks,
+  truckImg
 })

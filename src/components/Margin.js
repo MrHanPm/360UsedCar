@@ -24,36 +24,33 @@ export default class TruckList extends Component {
     return (
     <div style={{height: '100%'}}>
       <div className="TrLiBox">
-        <div className="cash">
-            <p>保证金将在拍卖结束后，竞拍失败或竞拍成功后完成线下交易1-3个工作日内还返，竞拍成功后10天内未完成线下交易将扣除保证金！ </p>
+        <div className="information">
+            <p>您在获拍后10天内完成线下交易，逾期未完成将视为违约，您的获拍资格将被取消，本次参拍的保证金将被扣除。</p>
         </div>
-        <ul className="cash-list">
+        <ul className="order-list">
             <li>
-                保证金编号
-                <var>BZJ83942860654757</var>
+                订单状态
+                <var>未提车</var>
+            </li>
+            <li>
+                最终成交价
+                <i>万</i>
+                <var>29.80</var>
             </li>
             <li>
                 保证金金额
-                <var>2000元</var>
+                <var>2000(交易完退还)</var>
             </li>
             <li>
-                保证金状态
-                <var>冻结中</var>
-            </li>
-            <li>
-                支付方式
-                <var>微信</var>
-            </li>
-            <li>
-                支付时间
-                <var>2016-09-12 19:00</var>
-            </li>
-            <li>
-                返回时间
-                <var>2016-09-20 19:00</var>
+                获拍时间
+                <var>2016-09-21 19:12</var>
             </li>
         </ul>
-        <h3>竞拍车</h3>
+        <div className="business">
+            <label>线下交易地址</label>   
+            <span className="area">江苏 苏州市 吴江区花港路花园闸路3期C座9层</span>
+        </div>
+        <h3>获拍车</h3>
         <ul className="get-list">
             <li>
                 <figure><img src="http://usr.im/80x80" alt="" /></figure>
@@ -64,8 +61,8 @@ export default class TruckList extends Component {
                 </div>
             </li>
         </ul>
-        </div>
-        <span className="go-back" onClick ={() => {window.history.back()}}>返回</span>
+      </div>
+      <span className="go-back" onClick ={() => {window.history.back()}}>返回</span>
       </div>
     )
   }

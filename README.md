@@ -41,15 +41,14 @@
 > 切换到淘宝 npm 源：`npm set registry https://registry.npm.taobao.org/`  
 > （经测试，`cnpm` 对于 `node-sass` 等问题多多的 Package 拥有秒杀能力）
 
-本示例项目需要结合 [API](https://github.com/MrHanPm/360CHE-React/UsedCar-Api)  
-  
-请分别 `git clone`，打开**两个**命令窗口（ Windows 下推荐使用 `Cygwin / Git Bash`）**分别**切换到两者的目录下  
-分别敲下 `npm install` 安装依赖（为避免 Windows 下 npm 2.x 的软链接问题，可加上 `--no-bin-link` 完全解构所有依赖）
 
-最后需要全局安装跨平台环境变量配置器：`npm i cross-env -g`
+
+敲下 `npm install` 安装依赖
+
+需要全局安装跨平台环境变量配置器：`npm i cross-env -g`
 
 ### <a name="start">⊙ 启动</a>
-先后在 `UsedCar-Api`、`UsedCar` 的命令窗口下，敲下 `npm start`  
+敲下 `npm start`  
 如无意外，默认浏览器就会自动打开 `localhost:9090`，您立即可以看到效果  
 若浏览器没有自动弹出，则请自行手动访问  
 
@@ -85,7 +84,7 @@
 ├── package.json     # （这个就不用多解释了吧）
 ```
 
-为了减少代码量，我省去了 [Prop 验证][proptypes]，建议您在往后的开发中使用
+为了减少代码量，省去了 [Prop 验证][proptypes]，建议您在往后的开发中使用
 
 ### <a name="performance">⊙ 性能</a>
 大概可参阅如下文章：
