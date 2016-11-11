@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router'
+import { ErrMsg, Tool } from 'UTIL/errMsg'
 
 
 export default class Navbar extends Component {
@@ -9,12 +9,10 @@ export default class Navbar extends Component {
   render () {
     return (
       <div className={`agree-btn ${this.props.className}`} style={this.props.style}>
-        <span className="agree" onClick={() => {
-          let url = window.location.pathname + '/0'
-          this.context.router.replace(url)
-        }}>不同意</span>
+        <span className="agree" onClick={() => {ErrMsg.to('抱歉，您未同意竞拍协议')}}>不同意</span>
         <span className="disagree" onClick={() => {
-          let url = window.location.pathname + '/1'
+          let pathname = Tool.localItem('pathname')
+          let url = pathname + '#1'
           this.context.router.replace(url)
         }}>同意</span>
       </div>

@@ -26,12 +26,13 @@ import Ok from 'VIEW/ok'
 
 import Err from 'COMPONENT/404'
 
-// <IndexRoute path="index" component={Welcome}/>
+
 const RouteConfig = (
 <Router history={history}>
   <Route path="/" component={App}>
-    <IndexRoute path="url" component={Url}/>
+    <IndexRoute component={Welcome}/>
     <Route path="index" component={Welcome}/>
+    <Route path="url" component={Url}/>
     <Route path="room/:id" component={TruckList}/>
     <Route path="truck/:roomId/:truId" component={TruckMsg}/>
     <Route path="report/:truId" component={TruckReport}/>

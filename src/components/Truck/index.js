@@ -204,7 +204,7 @@ export default class TruckMsg extends Component {
 
 
             <div className="gauging">
-                <h3>车辆检测报告<a href="#" className="examine">查看详情</a></h3>
+                <h3>车辆检测报告<a href="/report/11" className="examine">查看详情</a></h3>
                 <div className="post">
                     <figure><img src="http://usr.im/44x44" alt="" /></figure>
                     <figcaption>评估师: {truck.recondition_operator}</figcaption>
@@ -255,7 +255,7 @@ export default class TruckMsg extends Component {
 
 
             <div className="comments">
-                <h3>网友点评<a href="#" className="examine">查看更多</a></h3>
+                <h3>网友点评<a href="/comment" className="examine">查看更多</a></h3>
                 <div className="comments-list">
                     <span className="good current"></span>
                     <span className="good"></span>
@@ -267,7 +267,7 @@ export default class TruckMsg extends Component {
                     <em className="date">2016-08-29</em>
                 </div>
                 <div className="comments-msg">说到底，始终是垃圾，就是某些停留在10年前对国产卡车印象！</div>
-                <a href="#" className="know">我看过车，我来点评</a>
+                <a href="/review" className="know">我看过车，我来点评</a>
             </div>
 
 

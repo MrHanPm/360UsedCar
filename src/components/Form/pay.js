@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import handleChange from 'MIXIN/handleChange'
-import { ErrMsg } from 'UTIL/errMsg'
+import { ErrMsg, Tool } from 'UTIL/errMsg'
 // import { Link } from 'react-router'
 import Navbar from 'COMPONENT/Navbar/pay'
 import payService from 'SERVICE/payService'
@@ -23,30 +23,47 @@ export default class TruckList extends Component {
         name: '',
         tel: '',
         'city_id': '232323',
-        pay: ''
+        pay: '',
+        protocol: 0,
+        about: 0
     }
     this.handleChange = handleChange.bind(this)
     this.createPay = this.createPay.bind(this)
+    this.SaveData = this.SaveData.bind(this)
+    this.CheckForm = this.CheckForm.bind(this)
   }
-
   componentWillMount () {
     let { params: { amount } } = this.props
-    this.setState({
-        pay: amount
-    })
+    let names = Tool.localItem('name')
+    let hash = window.location.hash
+    if (hash == '#1') {
+        if (names === null) {
+            this.setState({
+                pay: amount,
+                protocol: 1
+            })
+        } else {
+            this.setState({
+                pay: amount,
+                name: names,
+                protocol: 1
+            })
+        }
+    } else {
+        if (names === null) {
+            this.setState({
+                pay: amount
+            })
+        } else {
+            this.setState({
+                pay: amount,
+                name: names
+            })
+        }
+    }
   }
   componentDidMount() {
 
-  }
-  createPay () {
-    if (this.checkForm()) {
-        let { params: { roomId, truId } } = this.props
-        payService
-        .createPay(roomId, truId, this.state.name, this.state.city_id)
-        .then(msg => {
-           return this.context.router.replace('/ok')
-        })
-    }
   }
   checkForm () {
     let nam = (this.state.name).replace(/\s+$|^\s+/g, '')
@@ -69,9 +86,45 @@ export default class TruckList extends Component {
         ErrMsg.to('地址不能为空')
         return false
     }
+    if (this.state.protocol == 0) {
+        ErrMsg.to('请同意竞拍服务协议')
+        return false
+    }
+    if (this.state.about == 0) {
+        ErrMsg.to('请同意保证金规则')
+        return false
+    }
     return true
   }
+  createPay () {
+    if (this.checkForm()) {
+        let { params: { roomId, truId } } = this.props
+        payService
+        .createPay(roomId, truId, this.state.name, this.state.city_id)
+        .then(msg => {
+           return this.context.router.replace('/ok')
+        })
+    }
+  }
+  SaveData () {
+    let pathname = window.location.pathname
+    Tool.localItem('pathname', pathname)
+    Tool.localItem('name', this.state.name)
+    return this.context.router.replace('/protocol')
+  }
+  CheckForm (e) {
+    if (e.target.checked) {
+        this.setState({
+            [e.target.name]: 1
+        })
+    } else {
+        this.setState({
+            [e.target.name]: 0
+        })
+    }
+  }
   render () {
+    let { name, protocol, about } = this.state
     return (
     <div style={{height: '100%'}}>
         <div className="BoxBt55">
@@ -81,7 +134,7 @@ export default class TruckList extends Component {
                     <input type="text"
                         name="name"
                         placeholder="请输入联系人姓名"
-                        value={this.state.name}
+                        value={name}
                         maxLength="6"
                         onChange={this.handleChange} />
                 </li>
@@ -110,11 +163,11 @@ export default class TruckList extends Component {
             </div>
             <div className="agree">
                 <div className="agreement-module">
-                    <input type="checkbox" />
-                    <span className="agreement">同意<a href="/protocol">《用户竞拍服务协议》</a></span>
+                    <input type="checkbox" name="protocol" checked={protocol ? 'checked' : '' } onClick={this.CheckForm}/>
+                    <span className="agreement">同意<a href="javascript:;" onClick={this.SaveData}>《用户竞拍服务协议》</a></span>
                 </div>
                 <div className="agree-module">
-                    <input type="checkbox" />
+                    <input type="checkbox" name="about" checked={about ? 'checked' : '' } onClick={this.CheckForm} />
                     <span className="agree-rule">同意<a href="/about">《保证金规则》</a></span>
                 </div>
             </div>

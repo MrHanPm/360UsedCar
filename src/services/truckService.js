@@ -16,6 +16,31 @@ class TruckService {
     })
   }
 
+/** 我的竞拍 */
+  intBids () {
+    return xhr({
+      url: '/member/bids/1'
+    })
+  }
+/** 我的获拍 */
+  intWins () {
+    return xhr({
+      url: '/member/wins/1'
+    })
+  }
+/** 我的保证金 */
+  intDepos () {
+    return xhr({
+      url: '/member/deposite/1'
+    })
+  }
+/** 我的提醒 */
+  intReminds () {
+    return xhr({
+      url: '/member/reminds/1'
+    })
+  }
+
 }
 
 // 实例化后再导出
