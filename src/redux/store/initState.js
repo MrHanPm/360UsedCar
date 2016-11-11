@@ -28,18 +28,22 @@ export default {
       abc: ''
     }
   },
-  /* 出价记录 */
-  bidRecord: [],
-  /* 出价 */
-  pay: {},
-  /* 我的竞拍 */
-  myBids: [],
-  /* 我的获拍 */
-  myWins: [],
-  /* 我的保证金 */
-  myDepos: [],
-  /* 我的提醒 */
-  myReminds: [],
+  pays: {
+      /* 出价记录 */
+      bidRecord: [],
+      /* 出价 */
+      pay: {}       
+  },
+  myMsg: {
+      /* 我的竞拍 */
+      myBids: [],
+      /* 我的获拍 */
+      myWins: [],
+      /* 我的保证金 */
+      myDepos: [],
+      /* 我的提醒 */
+      myReminds: []
+  },
   /* 留言板模块（按需加载） */
   msg: {
     msgs: [],           // 当前显示的留言列表

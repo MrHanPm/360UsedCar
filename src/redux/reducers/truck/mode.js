@@ -1,6 +1,6 @@
 import createReducer from 'UTIL/createReducer'
-import { ACTION_TRUCKMSG } from 'ACTION/truck/msg'
+import { ACTION_HANDLERS } from 'ACTION/truck/mode'
 import initState from 'STORE/initState'
 
-export default createReducer(initState.truckMsg.mode, ACTION_TRUCKMSG)
+export default createReducer(initState.truckMsg.mode, ACTION_HANDLERS)
 

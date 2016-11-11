@@ -3,30 +3,30 @@ import truckService from 'SERVICE/truckService'
 // ================================
 // Action Type
 // ================================
-const GET_TRUCKMSG = 'GET_TRUCKMSG'
+const INT_TRUCKMODE = 'INT_TRUCKMODE'
+
 
 // ================================
 // Action Creator
 // ================================
 
-const initMsg = (roomId, truId) => dispatch =>
+const modeMsg = (modelId) => dispatch =>
   truckService
-    .getMsg(roomId, truId)
+    .intsMsg(modelId)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({
-        type: GET_TRUCKMSG,
-        text: res.data
+        type: INT_TRUCKMODE,
+        payload: res.data
       })
       return res.data
     })
 
-
 export default {
-  initMsg
+  modeMsg
 }
 
 
 export const ACTION_HANDLERS = {
-  [GET_TRUCKMSG]: (dataDB, { text }) => text
+  [INT_TRUCKMODE]: (mode, { payload }) => payload
 }

@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux'
-import dataDB from './msgs'
-import mode from './mode'
+import bidRecord from './bid'
 
 export default combineReducers({
-  dataDB,
-  mode
+  bidRecord
 })

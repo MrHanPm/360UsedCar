@@ -1,8 +1,7 @@
 import createReducer from 'UTIL/createReducer'
-import { ACTION_MYDATA } from 'ACTION/mi'
+import { ACTION_HANDLERS } from 'ACTION/mi/wins'
 import initState from 'STORE/initState'
-import { combineReducers } from 'redux'
 
-const myWins = createReducer(initState.myWins, ACTION_MYDATA)
+export default createReducer(initState.myMsg.myWins, ACTION_HANDLERS)
 
-export default combineReducers({ DATA: myWins })
+

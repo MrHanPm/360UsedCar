@@ -1,8 +1,5 @@
 import createReducer from 'UTIL/createReducer'
-import { ACTION_MYDATA } from 'ACTION/mi'
+import { ACTION_HANDLERS } from 'ACTION/mi/bids'
 import initState from 'STORE/initState'
-import { combineReducers } from 'redux'
 
-const myBids = createReducer(initState.myBids, ACTION_MYDATA)
-
-export default combineReducers({ DATA: myBids })
+export default createReducer(initState.myMsg.myBids, ACTION_HANDLERS)

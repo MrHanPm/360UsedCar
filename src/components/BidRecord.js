@@ -3,9 +3,9 @@ import React, { Component } from 'react'
 import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
 import { connect } from 'react-redux'
 import { injectReducer } from 'REDUCER'
-injectReducer('bidRecord', require('REDUCER/bid').default)
+injectReducer('pays', require('REDUCER/truck/').default)
 @connect(
-  ({ bidRecord }) => ({ bidRecord }),
+  ({ pays }) => ({ pays }),
   require('ACTION/bid').default
 )
 

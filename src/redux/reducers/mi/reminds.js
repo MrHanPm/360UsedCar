@@ -1,8 +1,5 @@
 import createReducer from 'UTIL/createReducer'
-import { ACTION_MYDATA } from 'ACTION/mi'
+import { ACTION_HANDLERS } from 'ACTION/mi/reminds'
 import initState from 'STORE/initState'
-import { combineReducers } from 'redux'
 
-const myReminds = createReducer(initState.myReminds, ACTION_MYDATA)
-
-export default combineReducers({ DATA: myReminds })
+export default createReducer(initState.myMsg.myReminds, ACTION_HANDLERS)

@@ -32,7 +32,7 @@ export default {
 
 /* =======直接处理======= */
 
-export const ACTION_HOME = {
+export const ACTION_HANDLERS = {
   [LOD_HM]: (homeToday, { payload }) => [...payload]
 }
 // payload is userData
