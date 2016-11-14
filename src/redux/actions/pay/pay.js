@@ -1,23 +1,23 @@
 import payService from 'SERVICE/payService'
 
-const BID_RECOR = 'BID_RECOR'
+const PAY_BIDRECOR = 'PAY_BIDRECOR'
 
-const getBid = (roomId, truId, page, numb) => dispatch =>
+const payBid = (roomId, truId, pay) => dispatch =>
   payService
-    .bidRec(roomId, truId, page, numb)
+    .payRecs(roomId, truId, pay)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({
-        type: BID_RECOR,
+        type: PAY_BIDRECOR,
         payload: res.data
       })
       return res.data
     })
 
 export default {
-  getBid
+  payBid
 }
 
 export const ACTION_HANDLERS = {
-  [BID_RECOR]: (bidRecord, { payload }) => [...payload]
+  [PAY_BIDRECOR]: (pay, { payload }) => payload
 }

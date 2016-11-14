@@ -6,8 +6,8 @@ export default class Navbar extends Component {
   render () {
     return (
       <div className={`sure-btn ${this.props.className}`} style={this.props.style}>
-        <span className="sure">确定</span>
-        <span className="cancel">取消</span>
+        <span className="sure" onClick ={() => {window.history.back()}}>取消</span>
+        <span className="cancel" onClick={() => this.props.addClock()}>确定</span>
       </div>
     )
   }

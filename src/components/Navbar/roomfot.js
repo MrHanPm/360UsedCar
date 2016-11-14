@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router'
+import { Link } from 'react-router'
 
 
 export default class Navbar extends Component {
@@ -14,7 +14,7 @@ export default class Navbar extends Component {
         <div className="sign-end" style={{display: 'none'}}>
           <h4>已经结束</h4>
         </div>
-        <span className="menu"></span>
+        <Link className="menu" to="/index"></Link>
       </div>
     )
   }

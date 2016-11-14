@@ -3,10 +3,10 @@ import React, { Component } from 'react'
 import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
 import { connect } from 'react-redux'
 import { injectReducer } from 'REDUCER'
-injectReducer('pays', require('REDUCER/truck/').default)
+injectReducer('pays', require('REDUCER/pay/').default)
 @connect(
   ({ pays }) => ({ pays }),
-  require('ACTION/bid').default
+  require('ACTION/pay/').default
 )
 
 export default class BidREC extends Component {
@@ -24,9 +24,9 @@ export default class BidREC extends Component {
 
   }
   componentWillReceiveProps(nextProps) {
-    if (nextProps.bidRecord.DATA.length > 0) {
+    if (nextProps.pays.bidRecord.length > 0) {
         this.setState({
-            BID: nextProps.bidRecord.DATA
+            BID: nextProps.pays.bidRecord
         })
     }
   }
@@ -57,7 +57,7 @@ export default class BidREC extends Component {
             </li>
             { BID.map(db =>
             <li>
-                <span><img src={`http://face.360che.com${db.member.avatar}`} alt="" /></span>
+                <span><img src={db.member.avatar} alt="" /></span>
                 <span>{db.amount}万</span>
                 <span>{dataTimeFormatter(db.create_at * 1000, 10)}</span>
                 <em className="eliminated" style={{display: db.out ? 'none' : ''}}>出局</em>

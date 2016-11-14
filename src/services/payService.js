@@ -33,6 +33,7 @@ class PayService {
         }
     })
   }
+
 }
 
 // 实例化后再导出

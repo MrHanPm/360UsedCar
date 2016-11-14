@@ -40,6 +40,8 @@ export const dataTimeFormatter = (time, type) => {
       return `${zerofill(hours)}时${zerofill(minutes)}分${zerofill(second)}秒`
     case 6: // 2015-01-05
       return `${year}-${zerofill(month)}-${zerofill(day)}`
+    case 11: // 2015年01月05日
+      return `${year}年${zerofill(month)}月${zerofill(day)}日`
     case 9: // 2015年01月
       return `${year}年${zerofill(month)}月`
     case 7: // 2015-01-05 11:12

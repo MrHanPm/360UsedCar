@@ -1,26 +1,51 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
+import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
 
-// import { connect } from 'react-redux'
-// import Navbar from 'COMPONENT/Navbar/roomfot'
-// import { injectReducer } from 'REDUCER'
-// injectReducer('room', require('REDUCER/room/').default)
-
-// @connect(
-//   ({ room }) => ({ room }),
-//   require('ACTION/room').default
-// )
+import { connect } from 'react-redux'
+import { injectReducer } from 'REDUCER'
+injectReducer('myMsg', require('REDUCER/mi/').default)
+@connect(
+  ({ myMsg }) => ({ myMsg }),
+  require('ACTION/mi/').default
+)
 
 export default class TruckList extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {
+            MDB: {}
+        }
+    }
   componentWillMount () {
-    // let { params: { truckId } } = this.props
-    // this.props.getImg(truckId)
+    let { params: { depositeId } } = this.props
+    this.props.ismyDeposMsg(depositeId)
   }
   componentDidMount() {
 
   }
-
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+        MDB: nextProps.myMsg.deposMsg
+    })
+  }
   render () {
+    let { MDB } = this.state
+    let Lname = '无'
+     switch (MDB.order_status) {
+        case '1' :
+            Lname = '未付款'
+            break
+        case '2' :
+            Lname = '已付款'
+            break
+        case '3' :
+            Lname = '已扣除'
+            break
+        case '4' :
+            Lname = '已退还'
+            break
+     }
     return (
     <div style={{height: '100%'}}>
       <div className="TrLiBox">
@@ -30,15 +55,15 @@ export default class TruckList extends Component {
         <ul className="cash-list">
             <li>
                 保证金编号
-                <var>BZJ83942860654757</var>
+                <var>{MDB.order_id}</var>
             </li>
             <li>
                 保证金金额
-                <var>2000元</var>
+                <var>{MDB.amount}元</var>
             </li>
             <li>
                 保证金状态
-                <var>冻结中</var>
+                <var>{Lname}</var>
             </li>
             <li>
                 支付方式
@@ -46,21 +71,21 @@ export default class TruckList extends Component {
             </li>
             <li>
                 支付时间
-                <var>2016-09-12 19:00</var>
+                <var>{dataTimeFormatter(MDB.pay_date * 1000, 7)}</var>
             </li>
             <li>
                 返回时间
-                <var>2016-09-20 19:00</var>
+                <var>{dataTimeFormatter(MDB.refund_date * 1000, 7)}</var>
             </li>
         </ul>
         <h3>竞拍车</h3>
         <ul className="get-list">
             <li>
-                <figure><img src="http://usr.im/80x80" alt="" /></figure>
-                <figcaption>卡友们赶紧帮转发！！！寻找被盗东风寻找被盗东风寻找被盗东风</figcaption>
-                <em>国四/福田康明斯430马力/55吨</em>
+                <figure><img src={`http://face.360che.com${MDB.cover}`} alt="" /></figure>
+                <figcaption>{MDB.fullname}</figcaption>
+                <em>{MDB.explain}</em>
                 <div className="price">
-                    <span>起拍价:<var>29.00</var>万</span>
+                    <span>起拍价:<var>{MDB.init_price}</var>万</span>
                 </div>
             </li>
         </ul>

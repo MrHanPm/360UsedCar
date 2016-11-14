@@ -40,12 +40,12 @@ const RouteConfig = (
     <Route path="room/truck/:truckId" component={TruckImage}/>
     <Route path="auction" component={Auction}/>
     <Route path="bidRecord/:roomId/:truId" component={BidRecord}/>
-    <Route path="marginDetails" component={MarginDetails}/>
-    <Route path="margin" component={Margin}/>
-    <Route path="comment" component={Comment}/>
-    <Route path="clock" component={Clock}/>
+    <Route path="marginDetails/:depositeId" component={MarginDetails}/>
+    <Route path="margin/:bidId" component={Margin}/>
+    <Route path="comment/:roomId/:truId" component={Comment}/>
+    <Route path="clock/:roomId/:truId" component={Clock}/>
     <Route path="pay/:roomId/:truId/:amount(/:yn)" component={Pay}/>
-    <Route path="review" component={Review}/>
+    <Route path="review/:roomId/:truId" component={Review}/>
     <Route path="about" component={About}/>
     <Route path="protocol" component={Protocol}/>
     <Route path="ok" component={Ok}/>

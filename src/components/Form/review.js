@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
-
+import { ErrMsg } from 'UTIL/errMsg'
 // import { connect } from 'react-redux'
+import roomkService from 'SERVICE/roomService'
 import Navbar from 'COMPONENT/Navbar/comment'
 // import { injectReducer } from 'REDUCER'
 // injectReducer('room', require('REDUCER/room/').default)
@@ -12,6 +13,25 @@ import Navbar from 'COMPONENT/Navbar/comment'
 // )
 
 export default class TruckList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+        'salesroom_id': props.roomId,
+        'truck_id': props.truId,
+         action: 'tao',
+         method: 'reply',
+         star: 0,
+         uid: 0,
+         message: '',
+         tags: 0,
+         pid: '',
+         attachment: ''
+    }
+    this.onSave = this.onSave.bind(this)
+    this.taGs = this.taGs.bind(this)
+    this.Star = this.Star.bind(this)
+    this.inputMessage = this.inputMessage.bind(this)
+  }
   componentWillMount () {
     // let { params: { truckId } } = this.props
     // this.props.getImg(truckId)
@@ -19,24 +39,57 @@ export default class TruckList extends Component {
   componentDidMount() {
 
   }
-
+  checkForm () {
+    
+    if (this.state.uid === 0) {
+        ErrMsg.to('用户id是空的')
+        return false
+    }
+    return true
+  }
+  onSave () {
+    if (this.checkForm()) {
+        let db = this.state
+        roomkService
+        .addPosts(db)
+        .then(msg => {
+          
+        })
+    }
+  }
+  taGs (e) {
+    this.setState({
+        tags: e.target.title
+    })
+  }
+  Star (e) {
+    this.setState({
+        star: e.target.title
+    })
+  }
+  inputMessage (e) {
+    this.setState({
+        message: e.target.value
+    })
+  }
   render () {
+    let {message, tags, star} = this.state
     return (
     <div style={{height: '100%'}}>
         <div className="BoxBt55">
             <div className="review-head">
                 <p>一汽解放 解放J6P牵引车</p>
                 <div className="keep">
-                    <span>车况很好</span>
-                    <span className="select">保养的不错</span>
-                    <span>动力强劲</span>
-                    <span>外观有轻微损伤</span>
-                    <span>磨损严重</span>
-                    <span>有严重撞伤</span>
+                    <span title="1" className={tags == '1' ? 'select' : ''} onClick={this.taGs}>车况很好</span>
+                    <span title="2" className={tags == '2' ? 'select' : ''} onClick={this.taGs}>保养的不错</span>
+                    <span title="3" className={tags == '3' ? 'select' : ''} onClick={this.taGs}>动力强劲</span>
+                    <span title="4" className={tags == '4' ? 'select' : ''} onClick={this.taGs}>外观有轻微损伤</span>
+                    <span title="6" className={tags == '6' ? 'select' : ''} onClick={this.taGs}>磨损严重</span>
+                    <span title="5" className={tags == '5' ? 'select' : ''} onClick={this.taGs}>有严重撞伤</span>
                 </div>
             </div>
             <div className="write">
-                <textarea className="weui-textarea" placeholder="写点什么..." rows="3"></textarea>
+                <textarea className="weui-textarea" placeholder="写点什么..." rows="3" value={message} onInput={this.inputMessage}></textarea>
                 <div className="uploader-files">
                     <ul className="uploader">
                         <li>
@@ -55,14 +108,15 @@ export default class TruckList extends Component {
             </div>
             <div className="entiretyspan">
                 <em>总体评价</em>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span className="select"></span>
+                <span title="5" className={star >= 5 ? 'select' : ''} onClick={this.Star}></span>
+                <span title="4" className={star >= 4 ? 'select' : ''} onClick={this.Star}></span>
+                <span title="3" className={star >= 3 ? 'select' : ''} onClick={this.Star}></span>
+                <span title="2" className={star >= 2 ? 'select' : ''} onClick={this.Star}></span>
+                <span title="1" className={star >= 1 ? 'select' : ''} onClick={this.Star}></span>
             </div>
         </div>
-        <Navbar style={{top: '-60px'}} text="发表评论" />
+        <Navbar style={{top: '-60px'}} text="发表评论" 
+                onSave={this.onSave}/>
     </div>
     )
   }

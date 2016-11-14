@@ -41,6 +41,53 @@ class TruckService {
     })
   }
 
+/** 竞拍详情 */
+  intBidsMsg () {
+    return xhr({
+      url: '/member/bids/1'
+    })
+  }
+/** 获拍详情 */
+  intWinsMsg (bidId) {
+    return xhr({
+      url: `/member/bidview/${bidId}`
+    })
+  }
+/** 保证金详情 */
+  intDeposMsg (depositeId) {
+    return xhr({
+      url: `/member/depositeview/&{depositeId}`
+    })
+  }
+/** 创建提醒 */
+  crtReminds (roomId, truId, mode, point, times, pcode) {
+    return xhr({
+      url: '/member/remind',
+      type: 'post',
+      body: {
+            'salesroom_id': roomId,
+            'truck_id': truId,
+            mode: mode,
+            point: point,
+            difference: times,
+            captcha: pcode
+        }
+    })
+  }
+
+/** 删除提醒 */
+  delReminds (remindId) {
+    return xhr({
+      url: `/member/reminddel/${remindId}`
+    })
+  }
+
+    /** 发送验证码 */
+  pcodes () {
+    return xhr({
+      url: '/member/remindcaptcha'
+    })
+  }
 }
 
 // 实例化后再导出

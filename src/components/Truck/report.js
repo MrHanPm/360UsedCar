@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
 
-// import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/roomfot'
 // import { injectReducer } from 'REDUCER'
 // injectReducer('room', require('REDUCER/room/').default)
@@ -12,6 +11,7 @@ import Navbar from 'COMPONENT/Navbar/roomfot'
 // )
 
 export default class TruckList extends Component {
+
   componentWillMount () {
     // let { params: { truckId } } = this.props
     // this.props.getImg(truckId)

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router'
+import { Link } from 'react-router'
 
 
 export default class Navbar extends Component {
@@ -19,7 +19,7 @@ export default class Navbar extends Component {
           <em className="reduce" onClick={() => this.props.OnSale(1)}></em>
         </span>
         <i className="bidding" onClick={() => this.props.goPay()}>出价</i>
-        <span className="menu"></span>
+        <Link className="menu" to="/index"></Link>
         <div className="countdown">
           <div className="Box">
             <span className="present">

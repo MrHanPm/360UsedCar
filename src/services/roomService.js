@@ -17,6 +17,29 @@ class RoomService {
     })
   }
 
+
+/** 获取评论列表 
+* 入参是对象
+*/
+
+  getPostsList (json) {
+    return xhr({
+      url: '/interface/app/index.php',
+      type: 'get',
+      body: json
+    })
+  }
+
+/** 发表评论
+* 入参是对象
+*/
+  addPosts (json) {
+    return xhr({
+      url: '/interface/app/index.php',
+      type: 'post',
+      body: json
+    })
+  }
 }
 
 // 实例化后再导出

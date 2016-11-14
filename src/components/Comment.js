@@ -1,26 +1,46 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
 
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/comment'
-// import { injectReducer } from 'REDUCER'
-// injectReducer('room', require('REDUCER/room/').default)
+import { injectReducer } from 'REDUCER'
+injectReducer('room', require('REDUCER/room/').default)
 
-// @connect(
-//   ({ room }) => ({ room }),
-//   require('ACTION/room').default
-// )
+@connect(
+  ({ room }) => ({ room }),
+  require('ACTION/room/').default
+)
 
 export default class TruckList extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+        MDB: []
+    }
+  }
   componentWillMount () {
-    // let { params: { truckId } } = this.props
-    // this.props.getImg(truckId)
+    let { params: { roomId, truId } } = this.props
+    let json = {
+        'action': 'tao',
+        'method': 'comments',
+        'salesroom_id': roomId,
+        'truck_id': truId,
+        'page': '',
+        'items': ''
+    }
+    this.props.getPosts(json)
   }
   componentDidMount() {
 
   }
-
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+        MDB: nextProps.room.posts
+    })
+  }
   render () {
+    let { params: { roomId, truId } } = this.props
+    let { MDB, MDB: {posts} } = this.state
     return (
     <div style={{height: '100%'}}>
         <div className="TrLiBox">
@@ -38,16 +58,16 @@ export default class TruckList extends Component {
             <ul className="posts-list">
                 <li>
                     <div className="info">
-                        <span className="good current"></span>
-                        <span className="good"></span>
-                        <span className="good"></span>
-                        <span className="good"></span>
-                        <span className="good"></span>
+                        <span className={posts.star >= 1 ? 'good current' : 'good'}></span>
+                        <span className={posts.star >= 2 ? 'good current' : 'good'}></span>
+                        <span className={posts.star >= 3 ? 'good current' : 'good'}></span>
+                        <span className={posts.star >= 4 ? 'good current' : 'good'}></span>
+                        <span className={posts.star >= 5 ? 'good current' : 'good'}></span>
                         <figure><img src="http://usr.im/32x32" alt="" /></figure>
-                        <span className="user-wrap">打的去唐朝</span>
+                        <span className="user-wrap">{posts.author}</span>
                     </div>
                     <div className="content">
-                        <p>说到底，始终是垃圾，就是某些停留在10年前对国产卡车印象！</p>
+                        <p>{MDB.posts.message}</p>
                     </div>
                     <footer>
                         <span className="time">17分钟前</span>
@@ -58,7 +78,9 @@ export default class TruckList extends Component {
                 </li>
             </ul>
         </div>
-        <Navbar style={{top: '-60px'}}/>
+        <Navbar style={{top: '-60px'}}
+                roomId={roomId}
+                truId={truId} />
     </div>
     )
   }
