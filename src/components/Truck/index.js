@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
 import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/count'
+import NavbarPay from 'COMPONENT/Navbar/roomfot'
 import { injectReducer } from 'REDUCER'
 import { Link } from 'react-router'
 import { ErrMsg } from 'UTIL/errMsg'
@@ -14,6 +15,8 @@ injectReducer('truckMsg', require('REDUCER/truck/').default)
   ({ truckMsg }) => ({ truckMsg }),
   require('ACTION/truck/').default
 )
+
+
 export default class TruckMsg extends Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -34,6 +37,7 @@ export default class TruckMsg extends Component {
     }
     this.OnSale = this.OnSale.bind(this)
     this.goPay = this.goPay.bind(this)
+    this.Pay = this.Pay.bind(this)
   }
   componentWillMount () {
     let { params: { roomId, truId } } = this.props
@@ -64,6 +68,11 @@ export default class TruckMsg extends Component {
       if (msg) return this.context.router.replace(url)
     })
   }
+  Pay () {
+    let { params: { roomId, truId } } = this.props
+    let url = `/pay/${roomId}/${truId}/${this.state.data.truck.on_sale.deposite}`
+    this.context.router.replace(url)
+  }
   componentWillReceiveProps(nextProps) {
     if (nextProps.truckMsg.dataDB) {
         this.setState({ 
@@ -78,6 +87,23 @@ export default class TruckMsg extends Component {
     // let { data: { salesroom, truck: { on_sale, other_salesroom, other_trucks, pictures, recondition} } } = this.props.truckMsg
     let { salesroom, truck, truck: { pictures, recondition } } = this.state.data
     let Widths = window.screen.width
+    let footBtn
+    switch (salesroom.status) {
+        case 4:
+            footBtn = <NavbarPay style={{top: '-60px'}} show="false" />
+            break
+        default: 
+           footBtn = <NavbarPay style={{top: '-60px'}} show="true" 
+                                numb={truck.on_sale.deposite}
+                                Pay={this.Pay}/>
+    }
+    if (false) {
+        footBtn = <Navbar style={{top: '-60px'}}
+                    nowPrice={truck.current_price}
+                    OnSale = {this.OnSale}
+                    goPay = {this.goPay}
+                    pay = {this.state.pay}/>
+    }
     return (
     <div style={{height: '100%'}}>
         <div className="BoxBt55">
@@ -209,7 +235,7 @@ export default class TruckMsg extends Component {
                     <figure><img src="http://usr.im/44x44" alt="" /></figure>
                     <figcaption>评估师: {truck.recondition_operator}</figcaption>
                     <em>易卡车高级评估车</em>
-                    <span className="pic"><img src="http://usr.im/103x103" alt="" /></span>
+                    <span className="pic b"></span>
                 </div>
                 <i>共105项检测, 100项通过检测</i>
                 <p className="critique">点评：该车整体车况良好。经严格检测，绝非事故车辆。车辆外观无明显色差，车身骨架可见部位无结构性损伤，发动机运转良好无抖动，变速箱工作平稳无异响，内饰干净整洁，各功能按键完好无损坏。</p>
@@ -302,11 +328,7 @@ export default class TruckMsg extends Component {
                 </ul>
             </div>
         </div>
-        <Navbar style={{top: '-60px'}}
-            nowPrice={truck.current_price}
-            OnSale = {this.OnSale}
-            goPay = {this.goPay}
-            pay = {this.state.pay}/>
+        {footBtn}
     </div>
     )
   }

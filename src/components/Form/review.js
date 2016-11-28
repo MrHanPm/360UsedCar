@@ -37,7 +37,7 @@ export default class TruckList extends Component {
     // this.props.getImg(truckId)
   }
   componentDidMount() {
-
+    
   }
   checkForm () {
     
@@ -94,15 +94,16 @@ export default class TruckList extends Component {
                     <ul className="uploader">
                         <li>
                             <img src="http://usr.im/80x80" alt="" />
-                            <i className="icon"></i>
-                        </li>
-                        <li>
-                            <img src="http://usr.im/80x80" alt="" />
-                            <i className="progress">50%</i>
+                            <i className="icon" style={{display: 'none'}}></i>
+                            <i className="progress" style={{display: 'none'}}>50%</i>
                         </li>
                     </ul>
                     <div className="add-box">
-                        <span className="add-pic"></span>
+                        <span className="add-pic">
+                          <form enctype="multipart/form-data" method="post" name="imgFile">
+                            <input type="file" accept="image/png,image/gif,image/jpeg" />
+                          </form>
+                        </span>
                     </div>
                 </div>
             </div>

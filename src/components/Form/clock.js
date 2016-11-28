@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
+import handleChange from 'MIXIN/handleChange'
 import { ErrMsg } from 'UTIL/errMsg'
 // import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/yesNo'
@@ -16,14 +17,16 @@ export default class TruckList extends Component {
   constructor (props) {
     super(props)
     this.state = {
-        'salesroom_id': props.roomId,
-        'truck_id': props.truId,
-         mode: '',
+        'salesroom_id': props.params.roomId,
+        'truck_id': props.params.truId,
+         mode: 'sms',
          point: '',
-         difference: 0,
-         captcha: 0
+         difference: '',
+         captcha: ''
     }
     this.crtClick = this.crtClick.bind(this)
+    this.handleChange = handleChange.bind(this)
+    this.radios = this.radios.bind(this)
   }
   componentWillMount () {
 
@@ -32,12 +35,36 @@ export default class TruckList extends Component {
 
   }
   checkForm () {
-    
-    if (this.state.captcha === 0) {
-        ErrMsg.to('未填写6位手机验证码')
+    let txt = this.state.captcha
+    if (this.state.difference == '' || this.state.difference < 0) {
+        ErrMsg.to('请选择提醒时间')
+        return false
+    }
+    if (txt.length === 0 || txt == '') {
+        ErrMsg.to('请输入手机号')
+        return false
+    }
+    if (/^1[3|4|5|7|8]\d{9}$/.test(txt)) {
+
+    } else {
+        ErrMsg.to('请输入正确手机号')
         return false
     }
     return true
+  }
+  radios (e) {
+    let nub = e.target.value
+    if (nub > 300) {
+        this.setState({
+            point: 'end',
+            difference: nub
+        })
+    } else {
+        this.setState({
+            point: 'start',
+            difference: nub
+        })
+    }
   }
   crtClick () {
     if (this.checkForm()) {
@@ -59,16 +86,14 @@ export default class TruckList extends Component {
                     <li>
                         <label For="s11">
                             <i>开拍前5分钟提醒</i>
-                            <em>8月30日 9:55</em>
-                            <input type="checkbox" name="checkbox" className="weui-check" id="s11" />
+                            <input type="radio" name="checkbox" className="weui-check" id="s11" value="300" onChange={this.radios} />
                             <span className="choice"></span>
                         </label>
                     </li>
                     <li>
                         <label For="s12">
                             <i>结束前30分钟提醒</i>
-                            <em>8月30日 10:30</em>
-                            <input type="checkbox" name="checkbox1" className="weui-check" id="s12" />
+                            <input type="radio" name="checkbox" className="weui-check" id="s12" value="1800" onChange={this.radios} />
                             <span className="choice"></span>
                         </label>
                     </li>
@@ -79,10 +104,12 @@ export default class TruckList extends Component {
                 <ul>
                     <li>
                         手机短信提醒
-                        <a href="javascript:;" className="install">设置</a>
-                        <input type="number" className="Phone" placeholder="请输入您的手机号"/>
+                        <a href="javascript:;" className="install" style={{display: 'none'}}>设置</a>
+                        <input type="tel" className="Phone" name="captcha" value={this.state.captcha}
+                                maxLength="11" placeholder="请输入您的手机号" 
+                                onChange={this.handleChange}/>
                     </li>
-                    <li>
+                    <li style={{display: 'none'}}>
                         <label For="s13">
                             微信提醒
                             <input type="checkbox" name="checkbox2" className="weui-check" id="s13" />

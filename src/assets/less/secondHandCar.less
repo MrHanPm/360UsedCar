@@ -76,7 +76,7 @@
 .introduce .time span{color:#333;}
 .introduce .remind{position:absolute;top:10px;right:15px;width:86px;height:30px;line-height:32px;border-radius:16px;border:0.5px solid #02bb00;font-size:12px;color:#02bb00;text-align:center;}
 .introduce .remind:before{font-family: 'second';content:"\65f6";margin-right:4px;}
-.introduce .remind{position:absolute;top:73px;}
+.introduce .remind{position:absolute; top:auto; bottom: 20px;}
 
 .condition-list{background:#FFEEE6;padding:0 15px 0 25px;overflow:hidden;}
 .condition-list li{margin:20px 0;display: -webkit-box;display: -ms-flexbox;display:flex;}
@@ -138,6 +138,9 @@
 .gauging .post figcaption{font-size:16px;color:#333;}
 .gauging .post em{font-size:14px;color:#666;}
 .gauging .post .pic{position:absolute;top:15px;right:15px;width:103px;height:103px;background:url(../img/good_a.png) no-repeat;background-size:100%;}
+.gauging .post .b{background-image:url(../img/good_b.png);}
+.gauging .post .c{background-image:url(../img/good_c.png);}
+.gauging .post .d{background-image:url(../img/good_d.png);}
 .gauging i{display:block;font-size:16px;color:#f85200;padding:10px 0 20px 15px;}
 .gauging .critique{line-height:22px;font-size:14px;color:#333;padding:0 15px 15px;border-bottom:1px solid #e5e5e5;}
 
@@ -338,10 +341,10 @@ header .reference span i{font-size:16px;color:#f85200;font-weight:bold;}
 /*设置提醒*/
 .warn,.way{background:#fff;}
 .warn > header,.way > header{height:40px;line-height:40px;background:#f5f5f5;font-size:14px;color:#666;padding:0 15px;}
-.warn li{position:relative;height:59px;border-bottom:1px solid #e5e5e5;overflow:hidden;padding:0 15px;}
-.warn li i{display:inline-block;line-height:16px;margin-top:14px;font-size:16px;color:#333;}
+.warn li{position:relative;height:48px;border-bottom:1px solid #e5e5e5;overflow:hidden;padding:0 15px;}
+.warn li i{display:inline-block;line-height:48px;font-size:16px;color:#333;}
 .warn li em{display:block;line-height:12px;font-size:12px;color:#999;margin-top:4px;}
-.warn li .choice,.way li .choice{position:absolute;top:18px;right:15px;width:24px;height:24px;line-height: normal;}
+.warn li .choice,.way li .choice{position:absolute;top:12px;right:15px;width:24px;height:24px;line-height: normal;}
 .warn li .choice:before,.way li .choice:before{
     font-family: 'weui';
     content: '\EA01';
@@ -439,6 +442,7 @@ footer p{font-size:12px;color:#999;text-align:center;margin-top:20px;}
 .uploader li img{width:60px;height:60px;}
 .add-box{float:left;}
 .add-box .add-pic{position:relative;display:block;width:60px;height:60px;border:0.5px dashed #ddd;border-radius:6px;background:#fff;}
+.add-box .add-pic input{ width: 100%; height: 60px; opacity: 0;}
 .add-box .add-pic:before{position:absolute;top:50%;left:50%;margin:-20px 0 0 -15px;color:#ccc;font-size:26px;font-family: 'second';content:"\e759";}
 .entiretyspan{background:#fff;padding:15px;overflow:hidden;}
 .entiretyspan em{display:inline-block;line-height:16px;font-size:16px;color:#333;}
