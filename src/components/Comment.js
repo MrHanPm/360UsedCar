@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
-
+import { Tool } from 'UTIL/errMsg'
 import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/comment'
 import { injectReducer } from 'REDUCER'
@@ -20,13 +20,15 @@ export default class TruckList extends Component {
   }
   componentWillMount () {
     let { params: { roomId, truId } } = this.props
+    let sessionId = Tool.localItem('sessionId')
     let json = {
         'action': 'tao',
         'method': 'comments',
         'salesroom_id': roomId,
         'truck_id': truId,
         'page': '',
-        'items': ''
+        'items': '',
+        'session_id': sessionId
     }
     this.props.getPosts(json)
   }

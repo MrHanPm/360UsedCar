@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/roomfot'
 import {getPNA} from 'UTIL/posName'
+import { Tool } from 'UTIL/errMsg'
 import { injectReducer } from 'REDUCER'
 injectReducer('room', require('REDUCER/room/').default)
 
@@ -13,7 +14,8 @@ injectReducer('room', require('REDUCER/room/').default)
 export default class TruckList extends Component {
   componentWillMount () {
     let { params: { truckId } } = this.props
-    this.props.getImg(truckId)
+    let sessionId = Tool.localItem('sessionId')
+    this.props.getImg(sessionId, truckId)
   }
   componentDidMount() {
     // state = this.props || {}

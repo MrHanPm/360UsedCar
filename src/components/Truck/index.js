@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
-import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
+import { dataTimeFormatter, dataTimeCountdown} from 'UTIL/dateTimeFormatter'
 import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/count'
 import NavbarPay from 'COMPONENT/Navbar/roomfot'
 import { injectReducer } from 'REDUCER'
 import { Link } from 'react-router'
-import { ErrMsg } from 'UTIL/errMsg'
+import { ErrMsg, Tool } from 'UTIL/errMsg'
 import payService from 'SERVICE/payService'
 
 injectReducer('truckMsg', require('REDUCER/truck/').default)
@@ -29,22 +29,39 @@ export default class TruckMsg extends Component {
             truck: {
                 pictures: [],
                 recondition: [],
-                'on_sale': {}
+                'on_sale': {},
+                'other_salesroom': [],
+                'other_trucks': []
             }
         },
         increase: 0,
-        pay: 0
+        pay: 0,
+        isRoom: true
     }
     this.OnSale = this.OnSale.bind(this)
     this.goPay = this.goPay.bind(this)
     this.Pay = this.Pay.bind(this)
+    this.selRoom = this.selRoom.bind(this)
   }
   componentWillMount () {
+    let sessionId = Tool.localItem('sessionId')
     let { params: { roomId, truId } } = this.props
-    this.props.initMsg(roomId, truId)
+    this.props.initMsg(sessionId, roomId, truId)
   } 
   componentDidMount() {
 
+  }
+  selRoom (e) {
+    let val = e.target.title
+    if (val == 1) {
+        this.setState({
+            isRoom: true
+        })
+    } else {
+        this.setState({
+            isRoom: false
+        })
+    }
   }
   OnSale (nu) {
     if (nu) {
@@ -60,10 +77,11 @@ export default class TruckMsg extends Component {
     }
   }
   goPay () {
+    let sessionId = Tool.localItem('sessionId')
     let { params: { roomId, truId } } = this.props
     let url = `/pay/${roomId}/${truId}/${this.state.pay}`
     payService
-    .bidPay(roomId, truId, this.state.pay)
+    .bidPay(sessionId, roomId, truId, this.state.pay)
     .then(msg => {
       if (msg) return this.context.router.replace(url)
     })
@@ -85,8 +103,10 @@ export default class TruckMsg extends Component {
   render () {
     let { params: { roomId, truId } } = this.props
     // let { data: { salesroom, truck: { on_sale, other_salesroom, other_trucks, pictures, recondition} } } = this.props.truckMsg
-    let { salesroom, truck, truck: { pictures, recondition } } = this.state.data
+    let {isRoom, data: {salesroom, truck, truck: { pictures, recondition }}} = this.state
     let Widths = window.screen.width
+    let otherSalesroom = this.state.data.truck.other_salesroom
+    let otherTrucks = this.state.data.truck.other_trucks
     let footBtn
     switch (salesroom.status) {
         case 4:
@@ -137,11 +157,8 @@ export default class TruckMsg extends Component {
                     <em> {truck.current_price} </em><i>万元</i>
                     <span><var>{truck.on_sale.bid_persons}</var>人竞拍</span>
                 </div>
-                <div className="time">
-                    距离结束:
-                    <span className="hour">12时</span>
-                    <span className="minute">12分</span>
-                    <span className="second">49秒</span>
+                <div className="time" id={`Cod${salesroom.id}`} data-st={salesroom.begin_date * 1000} data-et={salesroom.finish_date * 1000}>
+                    {dataTimeCountdown(salesroom.begin_date * 1000, salesroom.finish_date * 1000, salesroom.id)}
                 </div>
                 <a href={`/clock/${roomId}/${truId}`} className="remind">设置提醒</a>
             </div>
@@ -205,7 +222,7 @@ export default class TruckMsg extends Component {
                     </li>
                 </ul>
                 <a href="#" className="deposit">保证金规则<em>未拍到全额退款</em></a>
-                <a href="#" className="regular">交易规则</a>
+                <a href="/about" className="regular">交易规则</a>
             </div>
 
 
@@ -300,31 +317,45 @@ export default class TruckMsg extends Component {
             <div className="same">
                 <div className="title">
                     <span className="change">
-                        <em className="selected">同场车辆</em>
-                        <em className="other">其他专场</em>
+                        <em className={isRoom ? 'selected' : 'other'} title="1" onClick={this.selRoom}>同场车辆</em>
+                        <em className={isRoom ? 'other' : 'selected'} title="0" onClick={this.selRoom}>其他专场</em>
                     </span>
                 </div>
-                <ul className="car-list">
+                <ul className="car-list" style={{display: isRoom ? '' : 'none'}}>
+                    { otherTrucks.map(db =>
                     <li>
-                        <figure><img src="http://usr.im/80x80" alt="" /></figure>
-                        <figcaption>卡友们赶紧帮转发！！！寻找被盗东风寻找被盗东风寻找被盗东风</figcaption>
-                        <em>国四/福田康明斯430马力/55吨</em>
-                        <em>出价6次/4人竞拍</em>
+                        <Link to={`/truck/${roomId}/${db.truck_id}`}>
+                        <figure>
+                            <img src={`http://face.360che.com${db.src}`} alt="" />
+                        </figure>
+                        <figcaption>{db.fullname}</figcaption>
+                        <em>{db.explain}</em>
+                        <em>出价{db.bid_count}次/{db.bid_persons}人竞拍</em>
                         <div className="price">
-                            <span>评估价:30.88万</span>
-                            <span>当前价:<var>24.88</var>万</span>
+                            <span>评估价:{db.sale_price}万</span>
+                            <span>当前价:<var>{db.cur_price}</var>万</span>
                         </div>
+                        </Link>
                     </li>
+                    )}
+                </ul>
+                <ul className="car-list" style={{display: isRoom ? 'none' : ''}}>
+                    { otherSalesroom.map(db =>
                     <li>
-                        <figure><img src="http://usr.im/80x80" alt="" /></figure>
-                        <figcaption>卡友们赶紧帮转发！！！寻找被盗东风寻找被盗东风寻找被盗东风</figcaption>
-                        <em>国四/福田康明斯430马力/55吨</em>
-                        <em>出价6次/4人竞拍</em>
+                        <Link to={`/truck/${db.salesroom_id}/${db.truck_id}`}>
+                        <figure>
+                            <img src={`http://face.360che.com${db.src}`} alt="" />
+                        </figure>
+                        <figcaption>{db.fullname}</figcaption>
+                        <em>{db.explain}</em>
+                        <em>出价{db.bid_count}次/{db.bid_persons}人竞拍</em>
                         <div className="price">
-                            <span>评估价:30.88万</span>
-                            <span>当前价:<var>24.88</var>万</span>
+                            <span>评估价:{db.sale_price}万</span>
+                            <span>当前价:<var>{db.cur_price}</var>万</span>
                         </div>
+                        </Link>
                     </li>
+                    )}
                 </ul>
             </div>
         </div>

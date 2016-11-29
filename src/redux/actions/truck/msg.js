@@ -9,9 +9,9 @@ const GET_TRUCKMSG = 'GET_TRUCKMSG'
 // Action Creator
 // ================================
 
-const initMsg = (roomId, truId) => dispatch =>
+const initMsg = (sessionId, roomId, truId) => dispatch =>
   truckService
-    .getMsg(roomId, truId)
+    .getMsg(sessionId, roomId, truId)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

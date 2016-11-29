@@ -4,8 +4,14 @@ import Navbar from 'COMPONENT/Navbar/'
 import { LoadBox } from 'VIEW/more'
 import { dataTimeCountdown} from 'UTIL/dateTimeFormatter'
 import { Link } from 'react-router'
+import { Tool } from 'UTIL/errMsg'
 
-
+import { injectReducer } from 'REDUCER'
+injectReducer('myMsg', require('REDUCER/mi/').default)
+@connect( 
+  ({ myMsg }) => ({ myMsg }),
+  require('ACTION/mi/user').default
+)
 @connect( // 功能同 UTIL/createContainer
   ({ homeToday }) => ({ homeToday }),
   require('ACTION/home').default
@@ -15,7 +21,16 @@ export default class Welcomes extends Component {
     isDatas: true
   }
   componentWillMount () {
-    this.props.checkHome()
+    let hase = window.location.search
+    let sessionId
+    if (hase) {
+      sessionId = hase.substring(hase.indexOf('=') + 1, hase.length)
+    } else {
+      sessionId = 'e728fb220fa6176afb27f8fef1cd0f65d834e73a'
+    }
+    Tool.localItem('sessionId', sessionId)
+    this.props.checkHome(sessionId)
+    this.props.getUserInfo(sessionId)
   }
   componentWillUnmount () {
     // dataTimeCountdown = () => {}

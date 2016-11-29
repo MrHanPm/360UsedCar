@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
 import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
+import { Tool } from 'UTIL/errMsg'
 import { connect } from 'react-redux'
 import { injectReducer } from 'REDUCER'
 injectReducer('pays', require('REDUCER/pay/').default)
@@ -17,8 +18,9 @@ export default class BidREC extends Component {
     }
   }
   componentWillMount () {
+    let sessionId = Tool.localItem('sessionId')
     let { params: { roomId, truId } } = this.props
-    this.props.getBid(roomId, truId, 1, 10)
+    this.props.getBid(sessionId, roomId, truId, 1, 10)
   }
   componentDidMount() {
 

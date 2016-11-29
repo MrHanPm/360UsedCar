@@ -5,8 +5,14 @@ import xhr from './xhr/'
  */
 class UserService {
 
-  checkLogin () {
-    return xhr({ url: '/salesroom/today' })
+  checkLogin (sessionId) {
+    return xhr({ 
+      url: '/salesroom/today',
+      type: 'get', 
+      body: {
+          'session_id': sessionId
+      }
+    })
   }
 
   /**

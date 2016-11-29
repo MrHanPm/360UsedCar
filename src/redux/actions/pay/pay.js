@@ -2,9 +2,9 @@ import payService from 'SERVICE/payService'
 
 const PAY_BIDRECOR = 'PAY_BIDRECOR'
 
-const payBid = (roomId, truId, pay) => dispatch =>
+const payBid = (sessionId, roomId, truId, pay) => dispatch =>
   payService
-    .payRecs(roomId, truId, pay)
+    .payRecs(sessionId, roomId, truId, pay)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

@@ -4,16 +4,24 @@ import xhr from './xhr/'
  */
 class RoomService {
 /** 获取专场汽车列表 */
-  inget (Id) {
+  inget (sessionId, Id) {
     return xhr({
-      url: `/salesroom/trucks/${Id}/1/10`
+      url: `/salesroom/trucks/${Id}/1/10`,
+      type: 'get', 
+        body: {
+            'session_id': sessionId
+        }
     })
   }
   
 /** 获取汽车图片 */
-  getImage (Id) {
+  getImage (sessionId, Id) {
     return xhr({
-      url: `/truck/pictures/${Id}`
+      url: `/truck/pictures/${Id}`,
+      type: 'get', 
+      body: {
+          'session_id': sessionId
+      }
     })
   }
 

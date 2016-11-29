@@ -8,9 +8,9 @@ const GET_IMG = 'GET_IMG'
 // Action Creator
 // ================================
 
-const getImg = Id => dispatch =>
+const getImg = (sessionId, Id) => dispatch =>
   roomService
-    .getImage(Id)
+    .getImage(sessionId, Id)
     .then(img => {
       let res = JSON.parse(img)
       dispatch({

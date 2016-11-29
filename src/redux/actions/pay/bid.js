@@ -2,9 +2,9 @@ import payService from 'SERVICE/payService'
 
 const BID_RECOR = 'BID_RECOR'
 
-const getBid = (roomId, truId, page, numb) => dispatch =>
+const getBid = (sessionId, roomId, truId, page, numb) => dispatch =>
   payService
-    .bidRec(roomId, truId, page, numb)
+    .bidRec(sessionId, roomId, truId, page, numb)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

@@ -22,7 +22,7 @@ export default class TruckList extends Component {
     this.state = {
         name: '',
         tel: '',
-        'city_id': '232323',
+        'city_id': '',
         pay: '',
         protocol: 0,
         about: 0
@@ -99,8 +99,9 @@ export default class TruckList extends Component {
   createPay () {
     if (this.checkForm()) {
         let { params: { roomId, truId } } = this.props
+        let sessionId = Tool.localItem('sessionId')
         payService
-        .createPay(roomId, truId, this.state.name, this.state.city_id)
+        .createPay(sessionId, roomId, truId, this.state.name, this.state.city_id)
         .then(msg => {
            return this.context.router.replace('/ok')
         })

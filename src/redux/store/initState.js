@@ -3,8 +3,7 @@
  */
 
 export default {
-  /* 用户 session */
-  userData: null,
+  
   /* 拍卖首页 */
   homeToday: [],
   /* 拍卖主场数据 */
@@ -27,6 +26,8 @@ export default {
       pay: {}
   },
   myMsg: {
+      /* 用户 session */
+      userData: null,
       /* 我的竞拍 */
       myBids: [],
       /* 我的获拍 */

@@ -58,7 +58,7 @@ const xhr = ({ url, type = 'GET', body = null}) => {
                 }
             }
         }
-        xhr.end = function () { 
+        xhr.end = function () {
             xhr.removeEventListener('readystatechange', httpEnd, false)
         }
     })

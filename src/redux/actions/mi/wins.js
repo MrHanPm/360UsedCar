@@ -8,9 +8,9 @@ const MY_WINS = 'MY_WINS'
 
 
 /** 我的获拍 */
-const ismyWins = () => dispatch =>
+const ismyWins = (sessionId) => dispatch =>
   truckService
-    .intWins()
+    .intWins(sessionId)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
-
+import { Tool } from 'UTIL/errMsg'
 import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/roomfot'
 import { injectReducer } from 'REDUCER'
@@ -19,8 +19,9 @@ export default class TruckList extends Component {
     }
   }
   componentWillMount () {
+    let sessionId = Tool.localItem('sessionId')
     let { params: { modelId } } = this.props
-    this.props.modeMsg(modelId)
+    this.props.modeMsg(sessionId, modelId)
   }
   componentDidMount() {
 

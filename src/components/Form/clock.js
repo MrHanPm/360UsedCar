@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
 import handleChange from 'MIXIN/handleChange'
-import { ErrMsg } from 'UTIL/errMsg'
+import { ErrMsg, Tool } from 'UTIL/errMsg'
 // import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/yesNo'
 import truckService from 'SERVICE/truckService'
@@ -68,9 +68,10 @@ export default class TruckList extends Component {
   }
   crtClick () {
     if (this.checkForm()) {
+        let sessionId = Tool.localItem('sessionId')
         let db = this.state
         truckService
-        .crtReminds(db.salesroom_id, db.truck_id, db.mode, db.point, db.difference, db.captcha)
+        .crtReminds(sessionId, db.salesroom_id, db.truck_id, db.mode, db.point, db.difference, db.captcha)
         .then(msg => {
           
         })

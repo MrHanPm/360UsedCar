@@ -4,9 +4,9 @@ const MY_REMINDSMSG = 'MY_REMINDSMSG'
 
 
 /** 创建提醒 */
-const ismyRemindsMsg = (roomId, truId, mode, point, times, pcode) => dispatch =>
+const ismyRemindsMsg = (sessionId, roomId, truId, mode, point, times, pcode) => dispatch =>
   truckService
-    .crtReminds(roomId, truId, mode, point, times, pcode)
+    .crtReminds(sessionId, roomId, truId, mode, point, times, pcode)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

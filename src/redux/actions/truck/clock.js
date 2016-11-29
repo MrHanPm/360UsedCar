@@ -9,9 +9,9 @@ const CRT_CLICK = 'CRT_CLICK'
 // Action Creator
 // ================================
 
-const crtClick = (roomId, truId, mode, point, times, pcode) => dispatch =>
+const crtClick = (sessionId, roomId, truId, mode, point, times, pcode) => dispatch =>
   truckService
-    .crtReminds(roomId, truId, mode, point, times, pcode)
+    .crtReminds(sessionId, roomId, truId, mode, point, times, pcode)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

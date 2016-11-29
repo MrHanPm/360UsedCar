@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-
+import { Tool } from 'UTIL/errMsg'
 import Heads from './Head'
 import { injectReducer } from 'REDUCER'
 injectReducer('room', require('REDUCER/room/').default)
@@ -18,8 +18,9 @@ export default class TruckList extends Component {
     }
   }
   componentWillMount () {
+    let sessionId = Tool.localItem('sessionId')
     let { params: { id } } = this.props
-    this.props.inGet(id)
+    this.props.inGet(sessionId, id)
   }
   componentDidMount() {
     // state = this.props || {}

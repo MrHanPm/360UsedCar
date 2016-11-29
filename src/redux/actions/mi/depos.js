@@ -5,9 +5,9 @@ const MY_DEPOS = 'MY_DEPOS'
 
 
 /** 我的保证金 */
-const ismyDepos = () => dispatch =>
+const ismyDepos = (sessionId) => dispatch =>
   truckService
-    .intDepos()
+    .intDepos(sessionId)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

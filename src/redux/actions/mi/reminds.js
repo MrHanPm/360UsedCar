@@ -5,9 +5,9 @@ const DEL_REMINDS = 'DEL_REMINDS'
 
 
 /** 我的提醒 */
-const ismyReminds = () => dispatch =>
+const ismyReminds = (sessionId) => dispatch =>
   truckService
-    .intReminds()
+    .intReminds(sessionId)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({
@@ -18,9 +18,9 @@ const ismyReminds = () => dispatch =>
     })
 
 /** 删除提醒 */
-const delsReminds = (remindId) => dispatch =>
+const delsReminds = (sessionId, remindId) => dispatch =>
   truckService
-    .delReminds(remindId)
+    .delReminds(sessionId, remindId)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

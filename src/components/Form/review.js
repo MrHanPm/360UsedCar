@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
-import { ErrMsg } from 'UTIL/errMsg'
+import { ErrMsg, Tool } from 'UTIL/errMsg'
+// import store from 'STORE'
 // import { connect } from 'react-redux'
 import roomkService from 'SERVICE/roomService'
 import Navbar from 'COMPONENT/Navbar/comment'
@@ -25,7 +26,8 @@ export default class TruckList extends Component {
          message: '',
          tags: 0,
          pid: '',
-         attachment: ''
+         attachment: '',
+         'session_id': ''
     }
     this.onSave = this.onSave.bind(this)
     this.taGs = this.taGs.bind(this)
@@ -33,11 +35,18 @@ export default class TruckList extends Component {
     this.inputMessage = this.inputMessage.bind(this)
   }
   componentWillMount () {
+    // console.log(store.getState())
     // let { params: { truckId } } = this.props
     // this.props.getImg(truckId)
+    let usD = JSON.parse(Tool.localItem('userData'))
+    // console.log(usD, 'usD')
+    this.setState({
+      uid: usD.uid
+    })
   }
   componentDidMount() {
-    
+    let sessionId = Tool.localItem('sessionId')
+    this.setState({'session_id': sessionId})
   }
   checkForm () {
     

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { Link } from 'react-router'
 import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
-
+import { Tool } from 'UTIL/errMsg'
 import { connect } from 'react-redux'
 import { injectReducer } from 'REDUCER'
 injectReducer('myMsg', require('REDUCER/mi/').default)
@@ -19,8 +19,9 @@ export default class TruckList extends Component {
         }
     }
   componentWillMount () {
+    let sessionId = Tool.localItem('sessionId')
     let { params: { bidId } } = this.props
-    this.props.ismyWinsMsg(bidId)
+    this.props.ismyWinsMsg(sessionId, bidId)
   }
   componentDidMount() {
 

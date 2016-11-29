@@ -5,9 +5,9 @@ const MY_BIDSMSG = 'MY_BIDSMSG'
 
 
 /** 我的竞拍 */
-const ismyBidsMsg = () => dispatch =>
+const ismyBidsMsg = (sessionId) => dispatch =>
   truckService
-    .intBidsMsg()
+    .intBidsMsg(sessionId)
     .then(msg => {
       let res = JSON.parse(msg)
       dispatch({

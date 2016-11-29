@@ -8,6 +8,7 @@ import myBidsMsg from './bidsMsg'
 import myDeposMsg from './deposMsg'
 import myRemindsMsg from './remindsMsg'
 import myWinsMsg from './winsMsg'
+import userData from './user'
 export default combineReducers({
   myBids,
   myDepos,
@@ -16,5 +17,6 @@ export default combineReducers({
   myBidsMsg,
   myDeposMsg,
   myRemindsMsg,
-  myWinsMsg
+  myWinsMsg,
+  userData
 })

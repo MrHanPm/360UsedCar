@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Navbar from 'COMPONENT/Navbar/'
 import { dataTimeFormatter} from 'UTIL/dateTimeFormatter'
 import { Link } from 'react-router'
+import { Tool } from 'UTIL/errMsg'
 // import { LoadBox } from 'VIEW/more'
 import { injectReducer } from 'REDUCER'
 
@@ -22,10 +23,11 @@ export default class Welcomes extends Component {
     }
   }
   componentWillMount () {
-    this.props.ismyBids()
-    this.props.ismyWins()
-    this.props.ismyDepos()
-    this.props.ismyReminds()
+    let sessionId = Tool.localItem('sessionId')
+    this.props.ismyBids(sessionId)
+    this.props.ismyWins(sessionId)
+    this.props.ismyDepos(sessionId)
+    this.props.ismyReminds(sessionId)
   }
   componentWillUnmount () {
     

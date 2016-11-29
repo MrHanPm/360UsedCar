@@ -12,9 +12,9 @@ const loadData = (obj) => ({
   payload: obj
 })
 
-const inGet = Id => dispatch =>
+const inGet = (sessionId, Id) => dispatch =>
   roomService
-    .inget(Id)
+    .inget(sessionId, Id)
     .then((re) => {
       if (!re) return
       let res = JSON.parse(re)
